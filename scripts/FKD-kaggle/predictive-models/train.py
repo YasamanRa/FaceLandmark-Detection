@@ -39,8 +39,8 @@ def train_model(model_func, save_path, epochs=400, save_model=False):
 if __name__ == "__main__":
 
     # ToDo: set these variables before running this script
-    model_func, exp_name = model.model_FC1, "single_hidden_layer"
-    #model_func, exp_name = model.model_conv3, "three_layer_convolution"
+    #model_func, exp_name = model.model_FC1, "single_hidden_layer"
+    model_func, exp_name = model.model_conv3, "three_layer_convolution"
 
     train_model(model_func, os.path.join("results/", exp_name), epochs=400, save_model=True)
 

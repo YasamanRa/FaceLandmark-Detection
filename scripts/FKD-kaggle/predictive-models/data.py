@@ -4,7 +4,7 @@ import pandas as pd
 
 dtdir = '../../../datasets/FKD-kaggle'
 
-def data(drop=True, cols=None):
+def data(drop=True, cols=None, reshape=False):
 
     test_set = pd.read_csv(os.path.join(dtdir, 'test.csv'))
     train_set = pd.read_csv(os.path.join(dtdir, 'training.csv'))
@@ -30,6 +30,10 @@ def data(drop=True, cols=None):
     y_train = train_set[train_set.columns[:-1]].values
     y_train = (y_train - 48) / 48.  # scale target coordinates to [-1, 1]
     y_train = y_train.astype(np.float32)
+    
+    if reshape:
+        X_train = X_train.reshape(-1, 96, 96, 1)
+        X_test = X_test.reshape(-1, 96, 96, 1)
 
     print('Train Shape:', X_train.shape, y_train.shape)
     print('Test Shape:', X_test.shape)
