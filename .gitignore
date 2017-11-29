@@ -4,4 +4,5 @@ datasets/*
 .idea/*
 *.h5
 *.hdf5
+*.pyc
 __pycache__/*
