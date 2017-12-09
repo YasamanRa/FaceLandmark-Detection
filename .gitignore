@@ -5,4 +5,6 @@ datasets/*
 *.h5
 *.hdf5
 *.pyc
-__pycache__/*
+__pycache__/
+bin/
+.ipynb_checkpoints/

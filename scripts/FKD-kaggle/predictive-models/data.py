@@ -3,8 +3,20 @@ import numpy as np
 import pandas as pd
 
 dtdir = '../../../datasets/FKD-kaggle'
+img_width = 96
+img_height = 96
 
-def data(drop=True, cols=None, reshape=False):
+def gray_to_rgb(X):
+    X = X.reshape(-1, 96, 96, 1)
+    
+    ret = np.empty((X.shape[0], img_width, img_height, 3), dtype=np.float32)
+    ret[:, :, :, 0] = X[:, :, :, 0]
+    ret[:, :, :, 1] = X[:, :, :, 0]
+    ret[:, :, :, 2] = X[:, :, :, 0]
+    return ret
+
+
+def data(drop=True, cols=None, reshape=False, g2rgb=False):
 
     test_set = pd.read_csv(os.path.join(dtdir, 'test.csv'))
     train_set = pd.read_csv(os.path.join(dtdir, 'training.csv'))
@@ -34,6 +46,10 @@ def data(drop=True, cols=None, reshape=False):
     if reshape:
         X_train = X_train.reshape(-1, 96, 96, 1)
         X_test = X_test.reshape(-1, 96, 96, 1)
+        
+    if g2rgb:
+        X_train = gray_to_rgb(X_train)
+        X_test = gray_to_rgb(X_test)
 
     print('Train Shape:', X_train.shape, y_train.shape)
     print('Test Shape:', X_test.shape)
